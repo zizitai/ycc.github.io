@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>同时加载两个地图</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <style>
+    body,
+    html {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        font-family: "微软雅黑";
+    }
+    #map1_container,
+    #map2_container {
+        float: left;
+        overflow: hidden;
+        width: 100%;
+        height: 50%;
+        margin: 0;
+    }
+    #allmap1 {
+        height: 100%;
+        margin: 0 0 3px;
+    }
+    #allmap2 {
+        height: 100%;
+        margin: 3px 0 0;
+    }
+    </style>
+    <script src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=X9Km4DAENa5ErN3C4BZCBZWGdyioHVmn
+"></script>
+</head>
+<body>
+    <div id="map1_container">
+        <div id="allmap1"></div>
+    </div>
+    <div id="map2_container">
+        <div id="allmap2"></div>
+    </div>
+</body>
+</html>
+<script>
+// 加载第一张地图
+var map1 = new BMapGL.Map('allmap1'); // 创建Map实例1
+var point1 = new BMapGL.Point(114.33999, 30.58270);
+map1.centerAndZoom(point1, 15);
+map1.enableScrollWheelZoom();
+// 加载第二张地图
+var map2 = new BMapGL.Map('allmap2'); // 创建Map实例2
+map2.setMapType(BMAP_EARTH_MAP);
+var point2 = new BMapGL.Point(114.33999, 30.58270);
+map2.centerAndZoom(point2, 15);
+map2.enableScrollWheelZoom();
+map1.addEventListener('moving', function () {
+        map2.panTo(this.getCenter())
+
+    })
+    map1.addEventListener('zoomend', function () {
+        map2.setZoom(this.getZoom())
+    })
+var marker1 = new BMapGL.Marker(new BMapGL.Point(114.33999,30.58270));
+var marker2 = new BMapGL.Marker(new BMapGL.Point(114.25, 30.548));
+var marker3 = new BMapGL.Marker(new BMapGL.Point(114.2768, 30.592));
+var marker4 = new BMapGL.Marker(new BMapGL.Point(114.223, 30.631));
+var marker5 = new BMapGL.Marker(new BMapGL.Point(114.420005,30.557869));
+var marker6 = new BMapGL.Marker(new BMapGL.Point(114.304546,30.614185));
+var marker7 = new BMapGL.Marker(new BMapGL.Point(114.285069,30.67007));
+var marker8 = new BMapGL.Marker(new BMapGL.Point(114.399429,30.59723));
+// 在地图上添加点标记
+map1.addOverlay(marker1);
+var opts = {
+    width: 200,
+    height: 100,
+    title: '湖北大学'
+};
+var infoWindow1 = new BMapGL.InfoWindow('介绍：1931年，学校前身为湖北省立教育学院，此后迭经国立湖北师范学院、湖北省教育学院、湖北省教师进修学院、湖北师范专科学校、武汉师范专科学校和武汉师范学院等时期。1984年8月，更名改制为湖北大学。', opts);
+// 点标记添加点击事件
+marker1.addEventListener('click', function () {
+    map1.openInfoWindow(infoWindow1,new BMapGL.Point(114.33999,30.58270)); // 开启信息窗口
+});
+    
+    
+map1.addOverlay(marker2);
+var opts = {
+    width: 200,
+    height: 100,
+    title: '武汉动物园'
+};
+var infoWindow2 = new BMapGL.InfoWindow('介绍：武汉动物园分前、中、后3区。前区为水陆游乐区，中区为野生动物展览区，并配置园林景观，后区待开发建设，拟建动物繁殖场和后勤基地。植物以常绿树为骨干，以樟树、池杉、水杉、竹为特色，有树木花卉180余种近8万余株，绿化覆盖率达81.3%，有大熊猫、金丝猴、棕熊、丹顶鹤、黑鹳、黑天鹅、斑马、长颈鹿、河马、大象、狮、虎、豹等珍禽异兽300余种3000余头（只）。', opts);
+// 点标记添加点击事件
+marker2.addEventListener('click', function () {
+    map1.openInfoWindow(infoWindow2,new BMapGL.Point(114.25, 30.548)); // 开启信息窗口
+});
+    
+    
+map1.addOverlay(marker3);
+var opts = {
+    width: 200,
+    height: 100,
+    title: '中山公园'
+};
+var infoWindow3 = new BMapGL.InfoWindow('介绍：武汉市中山公园位于汉口解放大道旁，是全国百家历史名园之一，国家重点公园。公园占地32.8万平方米，其中陆地26.8万平方米，水面6万平方米，绿化覆盖率达到93%。中山公园始建于1910年，经过几代人的艰辛努力，已成为集休闲、娱乐、游艺等多项服务功能于一身的大型综合性公园，是武汉闹市中的“绿宝石”，年接待游客量一千万余人次。公园分前、中、后三个景区。', opts);
+// 点标记添加点击事件
+marker3.addEventListener('click', function () {
+    map1.openInfoWindow(infoWindow3,new BMapGL.Point(114.2768, 30.592)); // 开启信息窗口
+});
+    
+    
+map1.addOverlay(marker4); 
+var opts = {
+    width: 200,
+    height: 100,
+    title: '武汉园博园'
+};
+var infoWindow4 = new BMapGL.InfoWindow('介绍：武汉园博园总面积为213.77公顷，投资40亿，位于湖北省武汉市硚口区张公堤城市森林公园区域西段，江汉、硚口、东西湖三区结合部位。', opts);
+// 点标记添加点击事件
+marker4.addEventListener('click', function () {
+    map1.openInfoWindow(infoWindow4,new BMapGL.Point(114.223, 30.631)); // 开启信息窗口
+});
+    
+    
+map1.addOverlay(marker5);
+var opts = {
+    width: 200,
+    height: 100,
+    title: '武汉东湖生态风景区'
+};
+var infoWindow5 = new BMapGL.InfoWindow('介绍：东湖生态旅游景区位于嘉峪关市南市区，是该市城建史上规模较大的生态建设工程，也是南市区建设的龙头工程', opts);
+// 点标记添加点击事件
+marker5.addEventListener('click', function () {
+    map1.openInfoWindow(infoWindow5,new BMapGL.Point(114.420005,30.557869)); // 开启信息窗口
+});
+    
+    
+map1.addOverlay(marker6); 
+var opts = {
+    width: 200,
+    height: 100,
+    title: '武汉解放公园'
+};
+var infoWindow6 = new BMapGL.InfoWindow('介绍：解放公园位于武汉市汉口西北隅，南界解放公园路，西邻市委机关大院。 解放公园始建于1952年，是武汉市大型公园之一。公园占地面积为46万平方米（其中水面7.6万平方米），仅次于马鞍山森林公园和武汉动物园，拥有植物种类410余种，绿地率高达85%。', opts);
+// 点标记添加点击事件
+marker6.addEventListener('click', function () {
+    map1.openInfoWindow(infoWindow6,new BMapGL.Point(114.304546,30.614185)); // 开启信息窗口
+});
+    
+    
+map1.addOverlay(marker7);
+var opts = {
+    width: 200,
+    height: 100,
+    title: '武汉海昌极地海洋世界'
+};
+var infoWindow7 = new BMapGL.InfoWindow('地址：武汉海昌极地海洋世界', opts);
+// 点标记添加点击事件
+marker7.addEventListener('click', function () {
+    map1.openInfoWindow(infoWindow7,new BMapGL.Point(114.285069,30.67007)); // 开启信息窗口
+});
+    
+    
+map1.addOverlay(marker8);
+var opts = {
+    width: 200,
+    height: 100,
+    title: '武汉欢乐谷'
+};
+var infoWindow8 = new BMapGL.InfoWindow('地址：武汉欢乐谷', opts);
+// 点标记添加点击事件
+marker8.addEventListener('click', function () {
+    map1.openInfoWindow(infoWindow8,new BMapGL.Point(114.399429,30.59723)); // 开启信息窗口
+});
+
+    
+
+        var p1 = new BMapGL.Point(114.33999,30.58270);
+        var p2 = new BMapGL.Point(114.399429,30.59723);
+
+        var driving = new BMapGL.DrivingRoute(map1, {renderOptions:{map: map1, autoViewport: true}});
+        driving.search(p1, p2);
+    
+    
+        var p3 = new BMapGL.Point(114.33999,30.58270);
+        var p4 = new BMapGL.Point(114.25, 30.548);
+
+        var driving = new BMapGL.DrivingRoute(map1, {renderOptions:{map: map1, autoViewport: true}});
+        driving.search(p3, p4);
+    
+        var p1 = new BMapGL.Point(114.33999,30.58270);
+        var p5 = new BMapGL.Point(114.2768, 30.592);
+
+        var driving = new BMapGL.DrivingRoute(map1, {renderOptions:{map: map1, autoViewport: true}});
+        driving.search(p1, p5);
+    
+    
+        var p1 = new BMapGL.Point(114.33999,30.58270);
+        var p6 = new BMapGL.Point(114.223, 30.631);
+
+        var driving = new BMapGL.DrivingRoute(map1, {renderOptions:{map: map1, autoViewport: true}});
+        driving.search(p1, p6);
+    
+        var p1 = new BMapGL.Point(114.33999,30.58270);
+        var p7 = new BMapGL.Point(114.420005,30.557869);
+
+        var driving = new BMapGL.DrivingRoute(map1, {renderOptions:{map: map1, autoViewport: true}});
+        driving.search(p1, p7);
+    
+    
+        var p1 = new BMapGL.Point(114.33999,30.58270);
+        var p8 = new BMapGL.Point(114.304546,30.614185);
+
+        var driving = new BMapGL.DrivingRoute(map1, {renderOptions:{map: map1, autoViewport: true}});
+        driving.search(p1, p8);
+    
+        var p1 = new BMapGL.Point(114.33999,30.58270);
+        var p9 = new BMapGL.Point(114.285069,30.67007);
+
+        var driving = new BMapGL.DrivingRoute(map1, {renderOptions:{map: map1, autoViewport: true}});
+        driving.search(p1, p9);
+        
+    
+
+//map2.addOverlay(marker1);
+//map2.addOverlay(marker2);
+//map2.addOverlay(marker3);
+//map2.addOverlay(marker4);
+//map2.addOverlay(marker5);
+//map2.addOverlay(marker6);
+//map2.addOverlay(marker7);
+//map2.addOverlay(marker8);
+
+</script>
